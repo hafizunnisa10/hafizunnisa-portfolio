@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Seamless Scroll</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    :root {
+        --primary: #D49e8d; /* Your brand terracotta */
+        --bg-aura: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+        --text-main: #1a1a1a;
+        --text-muted: #0f0707;
+        --glass: rgba(255, 255, 255, 0.4);
+        --glass-border: rgba(21, 15, 15, 0.6);
+        --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.05);
+    }
+
+    /* 1. Global Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+        background: var(--bg-aura);
+        background-attachment: fixed; /* Parallax effect */
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* 2. Floating Aura Background */
+    .aura-sphere {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(90px);
+        z-index: -1;
+        opacity: 0.6;
+        pointer-events: none;
+        animation: drift 20s infinite alternate ease-in-out;
+    }
+
+    @keyframes drift {
+        from { transform: translate(0, 0); }
+        to { transform: translate(100px, 50px); }
+    }
+
+    /* 3. Section Transitions */
+    section {
+        min-height: 100vh;
+        padding: 120px 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: transparent;
+    }
+
+    /* 4. Glassmorphism Cards (Projects/Skills) */
+    .glass-card {
+        background: var(--glass);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 4px; /* Minimalist sharp corners */
+        padding: 40px;
+        box-shadow: var(--shadow-soft);
+        transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+        transform: translateY(-10px);
+        background: rgba(11, 8, 8, 0.6);
+        border-color: var(--primary);
+    }
+
+    /* 5. Typography */
+    h1, h2, .playfair { font-family: 'Playfair Display', serif; font-style: italic; }
+    
+    .section-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    /* 6. High-Contrast Symbols (GitHub/LinkedIn) */
+    .symbol-link {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--text-main); /* Dark background for high contrast */
+        color: #fff;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .symbol-link:hover {
+        background: var(--primary);
+        transform: scale(1.1) rotate(5deg);
+    }
+</style>
+</head>
+<body>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+        <div class="nav-container rounded-2xl px-6 py-4 flex justify-between items-center shadow-lg transition-colors duration-500">
+            <div class="font-bold tracking-tighter text-xl">MH<span class="text-[#D49e8d]">.</span></div>
+            
+            <div class="hidden lg:flex space-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-black">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certifications" class="nav-link">Certs</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div>
+                <a href="#contact" class="bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded-full text-[10px] uppercase tracking-widest hover:scale-105 transition-all">Hire Me</a>
+            </div>
+             
+        </div>
+    </nav>
+
+    <main>
+        
+        <section id="home" class="bg-[#D49e8d] flex flex-col items-center justify-center">
+    <span class="section-number"></span>
+    
+    <div class="relative z-10 text-center fade-in">
+        
+        <div class="relative mx-auto mb-10 group">
+            <div class="absolute inset-0 border border-white/30 rounded-full scale-110 group-hover:scale-125 transition-transform duration-1000"></div>
+            
+            <div class="w-48 h-48 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl mx-auto">
+                <img 
+                    src="file:///C:/Users/USER/Downloads/WhatsApp%20Image%202026-02-03%20at%2011.30.28%20AM.jpeg" 
+                    alt="Mohammed Hafizunnisa" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                >
+            </div>
+        </div>
+
+        <h2 class="text-4xl md:text-6xl lg:text-8xl tracking-tighter text-white font-bold mb-4">
+            MOHAMMED HAFIZUNNISA<span class="italic text-black/20">.</span>
+        </h2>
+        
+        <div class="flex items-center justify-center gap-4">
+            <div class="h-[1px] w-12 bg-black/40"></div>
+            <p class="text-black tracking-[0.4em] uppercase text-[10px] md:text-xs font-medium">
+                specialized in ai and data science 
+            </p>
+            <div class="h-[1px] w-12 bg-black/40"></div>
+        </div>
+    </div>
+    <div class="flex flex-col items-center gap-2 opacity-50">
+        <span class="text-[9px] uppercase tracking-[0.3em] text-white">Explore</span>
+        <div class="w-[1px] h-12 bg-white"></div>
+    </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8">
+    
+    <div class="flex flex-col md:flex-row gap-4 z-20">
+        <a href="https://drive.google.com/file/d/14KMU2rtJG6EapZ85molbfuj1cyj6OUzE/view?usp=drivesdk" target="_blank" class="flex items-center gap-3 px-6 py-3 border border-white/40 text-white text-[10px] uppercase tracking-[0.2em] backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-500">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            View Resume
+        </a>
+
+        <a href="https://drive.google.com/uc?export=download&id=14KMU2rtJG6EapZ85molbfuj1cyj6OUzE" download class="flex items-center gap-3 px-6 py-3 bg-white text-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#D49e8d] hover:text-white transition-all duration-500 shadow-lg">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            Download CV
+        </a>
+    </div>
+</div>
+</section>
+        <section id="about" class="bg-[#F4F7FC]">
+            <span class="section-number"></span>
+            <div class="relative z-10 max-w-2xl text-center px-6">
+                <h2 class="text-5xl lg:text-7xl mb-8 italic">The Vision</h2>
+                <p class="text-gray-500 text-lg leading-relaxed font-light">
+                    I believe that technology should be as beautiful as it is functional. With a background in design and development, I bridge the gap between human emotion and digital precision.
+                </p>
+            </div>
+        <section id="internships" class="bg-[#F1F8F5] py-32 min-height-auto">
+    <span class="section-number"></span>
+    
+    <div class="relative z-10 max-w-5xl w-full px-10 mx-auto">
+        <div class="mb-20 text-center lg:text-left">
+            <h2 class="text-5xl lg:text-7xl mb-4 italic">Internships</h2>
+            <div class="h-1 w-20 bg-[#D49e8d] mx-auto lg:mx-0"></div>
+            <p class="text-gray-400 mt-6 tracking-[0.3em] uppercase text-xs font-bold">Professional Growth</p>
+        </div>
+
+        <div class="space-y-24">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group">
+                <div class="lg:col-span-4 border-l-2 border-gray-100 group-hover:border-[#D49e8d] transition-colors duration-500 pl-8">
+                    <span class="text-gray-400 group-hover:text-[#D49e8d] font-bold tracking-widest text-[10px] uppercase transition-colors">MAY 2025 — JULY 2025</span>
+                    <h3 class="text-3xl font-bold mt-2 uppercase tracking-tight">SmartInternZ</h3>
+                    <p class="text-gray-500 italic font-serif mt-1 text-sm">Virtual Internship</p>
+                </div>
+
+                <div class="lg:col-span-8 bg-[#faf9f6] p-8 lg:p-12 rounded-sm border border-gray-100 shadow-sm group-hover:shadow-md transition-all duration-500">
+                    <h4 class="text-xl font-bold uppercase tracking-wider mb-4">FullStack Developer Intern</h4>
+                    <p class="text-gray-600 leading-relaxed mb-8 font-light">
+                        Developed responsive web applications using the MERN stack, focusing on scalable architecture and modern user experience.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">React.js</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">Tailwind CSS</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">MongoDB</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">Node.js</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 text-sm text-gray-700 font-light">
+                            <span class="text-[#D49e8d]">/</span> Improved page load time by 40% through code splitting.
+                        </div>
+                        <div class="flex items-start gap-3 text-sm text-gray-700 font-light">
+                            <span class="text-[#D49e8d]">/</span> Collaborated with a cross-functional team of 8 members.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group">
+                <div class="lg:col-span-4 border-l-2 border-gray-100 group-hover:border-[#D49e8d] transition-colors duration-500 pl-8">
+                    <span class="text-gray-400 group-hover:text-[#D49e8d] font-bold tracking-widest text-[10px] uppercase transition-colors">APRIL 2025 — JUN 2025</span>
+                    <h3 class="text-3xl font-bold mt-2 uppercase tracking-tight">SmartInternZ</h3>
+                    <p class="text-gray-500 italic font-serif mt-1 text-sm">Data Analysis Program</p>
+                </div>
+
+                <div class="lg:col-span-8 bg-[#faf9f6] p-8 lg:p-12 rounded-sm border border-gray-100 shadow-sm group-hover:shadow-md transition-all duration-500">
+                    <h4 class="text-xl font-bold uppercase tracking-wider mb-4">Data Analytics with Tableau</h4>
+                    <p class="text-gray-600 leading-relaxed mb-8 font-light">
+                        Visualizing housing market trends: An analysis of sale prices and features to uncover key market drivers.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">Tableau</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">Excel</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">Data Visualization</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 text-sm text-gray-700 font-light">
+                            <span class="text-[#D49e8d]">/</span> Created interactive dashboards to communicate complex real estate trends.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group">
+                <div class="lg:col-span-4 border-l-2 border-gray-100 group-hover:border-[#D49e8d] transition-colors duration-500 pl-8">
+                    <span class="text-gray-400 group-hover:text-[#D49e8d] font-bold tracking-widest text-[10px] uppercase transition-colors">MAY 2024 — JULY 2024</span>
+                    <h3 class="text-3xl font-bold mt-2 uppercase tracking-tight">SmartInternZ</h3>
+                    <p class="text-gray-500 italic font-serif mt-1 text-sm">AI Training Program</p>
+                </div>
+
+                <div class="lg:col-span-8 bg-[#faf9f6] p-8 lg:p-12 rounded-sm border border-gray-100 shadow-sm group-hover:shadow-md transition-all duration-500">
+                    <h4 class="text-xl font-bold uppercase tracking-wider mb-4">Generative AI Intern</h4>
+                    <p class="text-gray-600 leading-relaxed mb-8 font-light">
+                        Focused on real-world application building using Large Language Models (LLMs) and integrating AI models with Python.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">Python</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">LLMs</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 text-[10px] font-bold uppercase tracking-tighter rounded-sm">API Integration</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 text-sm text-gray-700 font-light">
+                            <span class="text-[#D49e8d]">/</span> Built functional prototypes leveraging generative capabilities.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+        <section id="skills" class="bg-[#EEF2FF] py-32">
+    <span class="section-number"></span>
+    
+    <div class="relative z-10 max-w-6xl w-full px-10 mx-auto">
+        <div class="mb-20">
+            <h2 class="text-5xl lg:text-7xl mb-4 italic">All Skills</h2>
+            <div class="h-1 w-20 bg-[#D49e8d]"></div>
+            <p class="text-gray-400 mt-6 tracking-[0.3em] uppercase text-xs font-bold">Technical Arsenal</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="bg-white p-8 rounded-sm border-b-4 border-[#D49e8d] shadow-sm hover:-translate-y-2 transition-transform duration-500">
+                <h3 class="text-sm font-bold uppercase tracking-tighter mb-6 text-gray-400">Technical Skills</h3>
+                <ul class="space-y-4 text-gray-800 font-medium">
+                    <li class="flex justify-between items-center">Python <span class="text-[10px] text-[#D49e8d]">Expert</span></li>
+                    <li class="flex justify-between items-center">SQL <span class="text-[10px] text-[#D49e8d]">Advanced</span></li>
+                    <li class="flex justify-between items-center">Power BI <span class="text-[10px] text-[#D49e8d]">Visuals</span></li>
+                    <li class="flex justify-between items-center">Tableau <span class="text-[10px] text-[#D49e8d]">Analysis</span></li>
+                </ul>
+            </div>
+
+            <div class="bg-black p-8 rounded-sm shadow-xl hover:-translate-y-2 transition-transform duration-500 text-white">
+                <h3 class="text-sm font-bold uppercase tracking-tighter mb-6 text-gray-500">Development</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-[11px] bg-white/10 px-2 py-1 rounded">MERN Stack</span>
+                    <span class="text-[11px] bg-white/10 px-2 py-1 rounded">React.js</span>
+                    <span class="text-[11px] bg-white/10 px-2 py-1 rounded">Node.js</span>
+                    <span class="text-[11px] bg-white/10 px-2 py-1 rounded">Tailwind CSS</span>
+                    <span class="text-[11px] bg-white/10 px-2 py-1 rounded">MongoDB</span>
+                </div>
+                <p class="mt-6 text-[10px] text-gray-400 italic">Bridging AI with modern web interfaces.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-sm border-b-4 border-gray-200 shadow-sm hover:-translate-y-2 transition-transform duration-500">
+                <h3 class="text-sm font-bold uppercase tracking-tighter mb-6 text-gray-400">Soft Skills</h3>
+                <div class="space-y-2 text-sm text-gray-600">
+                    <p>Strategic Thinking</p>
+                    <p>Collaboration</p>
+                    <p>Communication</p>
+                    <p>Time Management</p>
+                </div>
+                <hr class="my-6 border-gray-100">
+                <h3 class="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400">Languages</h3>
+                <p class="text-xs font-bold uppercase">EN • UR • HI • TE</p>
+            </div>
+
+            <div class="bg-[#D49e8d] p-8 rounded-sm shadow-sm hover:-translate-y-2 transition-transform duration-500 text-white">
+                <h3 class="text-sm font-bold uppercase tracking-tighter mb-6 text-black/40">Hobbies</h3>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-center gap-3">
+                        <span class="text-lg">🎮</span> Playing Games
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-lg">📚</span> Reading Books
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-lg">🤝</span> Social Interaction
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+     <section id="projects" class="bg-[#FFFFFF]py-32">
+    <span class="section-number"></span>
+    
+    <div class="relative z-10 max-w-6xl w-full px-10 mx-auto">
+        <div class="mb-20">
+            <h2 class="text-5xl lg:text-7xl mb-4">Projects</h2>
+            <div class="h-1 w-20 bg-[#D49e8d]"></div>
+            <p class="text-gray-400 mt-6 tracking-[0.3em] uppercase text-xs font-bold">Selected Works</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+            
+            <div class="group">
+                <div class="relative overflow-hidden aspect-[16/10] bg-gray-100 mb-8 rounded-sm shadow-xl">
+                    <img src="https://hospitalityinsights.ehl.edu/hs-fs/hubfs/Blog-EHL-Insights/Blog-Header-EHL-Insights/AdobeStock_264542845.jpeg?width=1050&name=AdobeStock_264542845.jpeg" 
+                         alt="Food Waste Management" 
+                         class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition duration-1000 group-hover:scale-105">
+                    <div class="absolute bottom-0 left-0 bg-black text-white text-[9px] uppercase tracking-widest px-4 py-2">
+                        Full Stack Solution
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold uppercase tracking-tighter">Food Waste Management</h3>
+                <div class="flex gap-2 my-3">
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">PHP</span>
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">MySQL</span>
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">JavaScript</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed italic mb-6">
+                    Developed a community-driven bridge connecting restaurants with orphanages to redistribute surplus food efficiently.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://github.com/hafizunnisa10/Food-Waste-Management" class="flex items-center gap-2 px-4 py-2 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors">
+                        <i data-lucide="github" class="w-3 h-3"></i> view code 
+                    </a>
+                    <a href="https://resonant-panda-272d91.netlify.app/" class="flex items-center gap-2 px-4 py-2 border border-black text-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                        <i data-lucide="external-link" class="w-3 h-3"></i> Live Demo
+                    </a>
+                </div>
+            </div>
+
+            <div class="group md:mt-32">
+                <div class="relative overflow-hidden aspect-[16/10] bg-gray-100 mb-8 rounded-sm shadow-xl">
+                    <img src="file:///C:/Users/USER/OneDrive/Desktop/hafi/download%20(1).jfif">
+                    <div class="absolute bottom-0 left-0 bg-[#D49e8d] text-white text-[9px] uppercase tracking-widest px-4 py-2">
+                        FULL STACK
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold uppercase tracking-tighter">MY FIRST PORTFOLIO</h3>
+                <div class="flex gap-2 my-3">
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">HTML</span>
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">CSS</span>
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">JavaScript</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed italic mb-6">
+                    THE VERY PROJECT YOUR ARE LOOKING AT
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="flex items-center gap-2 px-4 py-2 border border-black text-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                        <i data-lucide="external-link" class="w-3 h-3"></i> Live Demo
+                    </a>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="relative overflow-hidden aspect-[16/10] bg-gray-100 mb-8 rounded-sm shadow-xl">
+                    <img src="https://jantahousing.com/wp-content/uploads/2023/07/market-trends.webp" 
+                         alt="House Market Trends" 
+                         class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition duration-1000 group-hover:scale-105">
+                    <div class="absolute bottom-0 left-0 bg-black text-white text-[9px] uppercase tracking-widest px-4 py-2">
+                        Business Intelligence
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold uppercase tracking-tighter">House Market Trends</h3>
+                <div class="flex gap-2 my-3">
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">Tableau</span>
+                    <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded">Excel</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed italic mb-6">
+                    A team project.Transforming raw real estate data into interactive dashboards to identify seasonal trends and investment opportunities.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://github.com/Charvichettubadua/housing-market-dashboard/blob/main/Final%20Report.docx" class="flex items-center gap-2 px-4 py-2 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors">
+                        <i data-lucide="github" class="w-3 h-3"></i> view code 
+                    </a>
+                     <a href="https://public.tableau.com/app/profile/charvi.sri.chettubadula/viz/Dashboard_17511802297930/Dashboard4?publish=yes" class="flex items-center gap-2 px-4 py-2 border border-black text-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                    <i data-lucide="external-link" class="w-3 h-3"></i> Dashboard
+                    </a>
+                    <a href="https://public.tableau.com/app/profile/ghanta.saibabu/viz/story-1_17509334098390/Story3" class="flex items-center gap-2 px-4 py-2 border border-black text-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                        <i data-lucide="external-link" class="w-3 h-3"></i> stories
+                    </a>
+                </div>
+            </div>
+
+            <div class="group md:mt-32">
+                <div class="relative overflow-hidden aspect-[16/10] bg-gray-100 mb-8 rounded-sm shadow-xl border border-dashed border-gray-300 flex items-center justify-center">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200" 
+                         alt="New Project" 
+                         class="object-cover w-full h-full opacity-20 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition duration-1000">
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="text-[10px] uppercase tracking-[0.5em] text-gray-400 font-bold bg-white/80 px-4 py-2">Upcoming Innovation</span>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold uppercase tracking-tighter">Next upcoming Project</h3>
+                <div class="flex gap-2 my-3">
+                    <span class="text-[10px] bg-[#D49e8d] text-white px-2 py-0.5 rounded font-bold">In Progress</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed italic mb-6">
+                    Currently developing a new AI-driven solution. Stay tuned for details on the architecture and impact.
+                </p>
+                <div class="flex gap-4">
+                   
+                </div>
+                
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+  lucide.createIcons();
+</script>
+
+       <section id="certifications" class="bg-[#FFF6E9] py-32">
+    <span class="section-number"></span>
+    
+    <div class="relative z-10 max-w-6xl w-full px-10 mx-auto">
+        <div class="mb-20 text-center lg:text-left">
+            <h2 class="text-5xl lg:text-7xl mb-4 italic">Certifications</h2>
+            <div class="h-1 w-20 bg-[#D49e8d] mx-auto lg:mx-0"></div>
+            <p class="text-gray-400 mt-6 tracking-[0.3em] uppercase text-xs font-bold">Verified Expertise</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white p-8 border border-gray-100 flex flex-col justify-between group hover:border-[#D49e8d] transition-all duration-500 shadow-sm">
+                <div>
+                    <div class="text-[10px] font-bold text-[#D49e8d] uppercase tracking-[0.2em] mb-4">IBM</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tighter leading-tight mb-6">Machine Learning with Python</h3>
+                </div>
+                <a href="https://drive.google.com/file/d/1TJJ1FL9Hyrx7WL7sX1lWQyJ4b8DZh7Sf/view?usp=drivesdk" target="_blank" class="inline-flex items-center justify-between w-full px-4 py-3 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors duration-300">
+                    View Certificate <span>→</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-8 border border-gray-100 flex flex-col justify-between group hover:border-[#D49e8d] transition-all duration-500 shadow-sm">
+                <div>
+                    <div class="text-[10px] font-bold text-[#D49e8d] uppercase tracking-[0.2em] mb-4">Amazon Web Services</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tighter leading-tight mb-6">Certified in Cloud Computing</h3>
+                </div>
+                <a href="https://drive.google.com/file/d/1bOGHhyxgr-dP0S0j0qWF80g0XZeCqh5l/view?usp=drivesdk" target="_blank" class="inline-flex items-center justify-between w-full px-4 py-3 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors duration-300">
+                    View Certificate <span>→</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-8 border border-gray-100 flex flex-col justify-between group hover:border-[#D49e8d] transition-all duration-500 shadow-sm">
+                <div>
+                    <div class="text-[10px] font-bold text-[#D49e8d] uppercase tracking-[0.2em] mb-4">SmartInternz</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tighter leading-tight mb-6">Data Analytics with Tableau</h3>
+                </div>
+                <a href="https://drive.google.com/file/d/1HCn1ZBpWdK_LpfrzOnmeYMr65Z5rZ3aw/view?usp=drivesdk" target="_blank" class="inline-flex items-center justify-between w-full px-4 py-3 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors duration-300">
+                    View Certificate <span>→</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-8 border border-gray-100 flex flex-col justify-between group hover:border-[#D49e8d] transition-all duration-500 shadow-sm">
+                <div>
+                    <div class="text-[10px] font-bold text-[#D49e8d] uppercase tracking-[0.2em] mb-4">SmartInternz</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tighter leading-tight mb-6">Generative AI</h3>
+                </div>
+                <a href="https://drive.google.com/file/d/1sU4XgPksfRhUvuwV1_l0RHILUhKJKzJI/view?usp=drivesdk" target="_blank" class="inline-flex items-center justify-between w-full px-4 py-3 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors duration-300">
+                    View Certificate <span>→</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-8 border border-gray-100 flex flex-col justify-between group hover:border-[#D49e8d] transition-all duration-500 shadow-sm">
+                <div>
+                    <div class="text-[10px] font-bold text-[#D49e8d] uppercase tracking-[0.2em] mb-4">NPTEL</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tighter leading-tight mb-6">Introduction to Internet of Things</h3>
+                </div>
+                <a href="https://drive.google.com/file/d/1zcGbO3y9ZRFlPdoHQJATbIxeNmothyiz/view?usp=drivesdk" target="_blank" class="inline-flex items-center justify-between w-full px-4 py-3 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors duration-300">
+                    View Certificate <span>→</span>
+                </a>
+            </div>
+
+            <div class="bg-white p-8 border border-gray-100 flex flex-col justify-between group hover:border-[#D49e8d] transition-all duration-500 shadow-sm">
+                <div>
+                    <div class="text-[10px] font-bold text-[#D49e8d] uppercase tracking-[0.2em] mb-4">Talent Battle</div>
+                    <h3 class="text-xl font-bold uppercase tracking-tighter leading-tight mb-6">Placement Kick-Starter Workshop</h3>
+                </div>
+                <a href="https://drive.google.com/file/d/1zhBpaNB5IiyUTeVH1nuQ5teM_fVpCJjV/view?usp=drivesdk" target="_blank" class="inline-flex items-center justify-between w-full px-4 py-3 bg-black text-white text-[10px] uppercase tracking-widest hover:bg-[#D49e8d] transition-colors duration-300">
+                    View Certificate <span>→</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+        <section id="contact" class="bg-black text-white py-32 relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D49e8d]/10 blur-[120px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-6xl w-full px-10 mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+            
+            <div>
+                <h2 class="text-5xl lg:text-7xl mb-6 italic">Get In Touch</h2>
+                <p class="text-gray-400 text-lg mb-12 font-light leading-relaxed">
+                    
+                </p>
+
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-[10px] uppercase tracking-[0.3em] text-[#D49e8d] font-bold mb-2">Email</h4>
+                        <a href="mailto:hafizunnisamd.786@gmail.com" class="text-xl hover:text-[#D49e8d] transition">hafizunnisamd.786@gmail.com</a>
+                    </div>
+                    <div>
+                        <h4 class="text-[10px] uppercase tracking-[0.3em] text-[#D49e8d] font-bold mb-2">Phone</h4>
+                        <p class="text-xl">+91-8466869802</p>
+                    </div>
+                    <div>
+                        <h4 class="text-[10px] uppercase tracking-[0.3em] text-[#D49e8d] font-bold mb-2">Location</h4>
+                        <p class="text-xl">India</p>
+                    </div>
+                    <div class="pt-6">
+                        <h4 class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">Follow Me</h4>
+                        <div class="flex gap-6">
+                            <a href="https://www.linkedin.com/in/mohammed-hafizunnisa/" class="hover:text-[#D49e8d] transition"><i data-lucide="linkedin"></i></a>
+                            <a href="https://github.com/hafizunnisa10" class="hover:text-[#D49e8d] transition"><i data-lucide="github"></i></a>
+                            <a href="https://x.com/MHafizunni53339" class="hover:text-[#D49e8d] transition"><i data-lucide="twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <div class="bg-white/5 backdrop-blur-sm p-8 lg:p-12 rounded-sm border border-white/10">
+    <form action="https://formspree.io/f/xpqlnlad" method="POST" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="text-[10px] uppercase tracking-widest text-gray-400">Full Name</label>
+                <input type="text" name="name" required class="w-full bg-transparent border-b border-gray-700 py-2 focus:border-[#D49e8d] outline-none transition text-white">
+            </div>
+            <div class="space-y-2">
+                <label class="text-[10px] uppercase tracking-widest text-gray-400">Email Address</label>
+                <input type="email" name="email" required class="w-full bg-transparent border-b border-gray-700 py-2 focus:border-[#D49e8d] outline-none transition text-white">
+            </div>
+        </div>
+        <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-widest text-gray-400">Subject</label>
+            <input type="text" name="subject" class="w-full bg-transparent border-b border-gray-700 py-2 focus:border-[#D49e8d] outline-none transition text-white">
+        </div>
+        <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-widest text-gray-400">Message</label>
+            <textarea name="message" rows="4" required class="w-full bg-transparent border-b border-gray-700 py-2 focus:border-[#D49e8d] outline-none transition text-white"></textarea>
+        </div>
+        
+        <button type="submit" class="w-full py-4 bg-[#D49e8d] text-white hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-[0.3em] text-[10px] font-bold">
+            Send Message
+        </button>
+    </form>
+</div>
+</div>
+
+        <div class="mt-32 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+            <div>
+                <h3 class="text-2xl font-bold tracking-tighter">MOHAMMED HAFIZUNNISA</h3>
+                <p class="text-[#D49e8d] text-[10px] uppercase tracking-[0.2em] mt-1">DATA SCIENTIST</p>
+                <p class="text-gray-500 text-sm mt-4 italic leading-relaxed">
+                    To secure a challenging entry-level role where, as a fresher, I can learn quickly, adapt to responsibilities, apply my
+academic knowledge, and contribute positively to the overall success of the team.
+                </p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <h4 class="text-[10px] uppercase tracking-widest text-white font-bold mb-2">Quick Links</h4>
+                <a href="#about" class="text-gray-500 hover:text-white transition text-sm w-fit">About</a>
+                <a href="#projects" class="text-gray-400 hover:text-white transition text-sm w-fit">Projects</a>
+                <a href="#skills" class="text-gray-400 hover:text-white transition text-sm w-fit">Skills</a>
+                <a href="#contact" class="text-gray-400 hover:text-white transition text-sm w-fit">Contact</a>
+            </div>
+
+            <div>
+                <h4 class="text-[10px] uppercase tracking-widest text-white font-bold mb-4">Connect With Me</h4>
+                <div class="flex gap-4">
+                    <a href="https://github.com/hafizunnisa10" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-[#D49e8d] transition">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohammed-hafizunnisa/" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-[#D49e8d] transition">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://x.com/MHafizunni53339" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-[#D49e8d] transition">
+                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <p class="text-[9px] uppercase tracking-[0.5em] text-gray-700 mt-10">
+                    MY OWN CREATIONS &bull; 2026
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+<script>
+  lucide.createIcons();
+</script>
+</script>
+</body>
+</html>
